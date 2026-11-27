@@ -63,7 +63,15 @@ enum ConnectionCheck {
         // A custom address goes through the client the chat uses for it, which repairs a doubled
         // `data:` stream, so the test passes or fails as the chat would.
         let endpoint = provider == .custom ? CustomEndpointClient() : nil
-        let probe = Probe(inner: endpoint ?? (provider == .aimlapi ? AIMLAPIClient() : DefaultProviderHTTPClient()))
+        let transport: any ProviderHTTPClient
+        if let endpoint {
+            transport = endpoint
+        } else if provider == .aimlapi {
+            transport = AIMLAPIClient()
+        } else {
+            transport = DefaultProviderHTTPClient()
+        }
+        let probe = Probe(inner: transport)
         let cancel = CancellationToken()
         var options = SimpleStreamOptions()
         options.apiKey = key.isEmpty && provider == .custom ? "none" : key
