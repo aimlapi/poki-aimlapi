@@ -77,4 +77,28 @@ final class AIMLAPIProviderTests: XCTestCase {
         XCTAssertEqual(ModelCatalog.aimlapiChatItems(items).compactMap { $0["id"] as? String },
                        ["google/gemini-3.8-flash", "vendor/plain-chat"])
     }
+
+    /// A fresh install with nothing set up starts on AI/ML API.
+    func testAFreshInstallStartsOnAIMLAPI() throws {
+        let isolated = try IsolatedTestStorage()
+        defer { try? isolated.tearDown() }
+        XCTAssertEqual(ModelKeys.selectedProvider(in: isolated.storage), .aimlapi)
+        XCTAssertEqual(ModelKeys.selectedModel(in: isolated.storage), "google/gemini-3.8-flash")
+    }
+
+    /// An owner with a key for another account and no saved choice keeps Anthropic, as before.
+    func testAnOwnerWithAnotherKeyKeepsTheOldDefault() throws {
+        let isolated = try IsolatedTestStorage()
+        defer { try? isolated.tearDown() }
+        try ModelKeys.save("placeholder-test-key", for: .anthropic, storage: isolated.storage)
+        XCTAssertEqual(ModelKeys.selectedProvider(in: isolated.storage), .anthropic)
+    }
+
+    /// A saved choice always wins.
+    func testASavedChoiceIsKept() throws {
+        let isolated = try IsolatedTestStorage()
+        defer { try? isolated.tearDown() }
+        ModelKeys.setSelectedProvider(.openrouter, in: isolated.storage)
+        XCTAssertEqual(ModelKeys.selectedProvider(in: isolated.storage), .openrouter)
+    }
 }

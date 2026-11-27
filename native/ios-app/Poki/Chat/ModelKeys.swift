@@ -445,7 +445,21 @@ enum ModelKeys {
     }
 
     static func selectedProvider(in storage: PokiStorage = .live) -> ModelProvider {
-        storage.defaults.string(forKey: "chat.provider").flatMap(ModelProvider.init(rawValue:)) ?? .anthropic
+        storage.defaults.string(forKey: "chat.provider").flatMap(ModelProvider.init(rawValue:)) ?? firstRunProvider(in: storage)
+    }
+
+    /// The account a Poki with no choice saved starts on: AI/ML API (one key, every lab's models) on a
+    /// fresh install, Anthropic as before once any key, sign-in or custom service is there, so an owner
+    /// who set one up keeps what they had.
+    static func firstRunProvider(in storage: PokiStorage = .live) -> ModelProvider {
+        let setUp = ModelProvider.allCases.contains { provider in
+            switch provider {
+            case .chatgpt: ChatGPTAccount.isSignedIn(storage: storage)
+            case .custom: !CustomProviders.all(in: storage).isEmpty
+            default: hasKey(provider, storage: storage)
+            }
+        }
+        return setUp ? .anthropic : .aimlapi
     }
 
     static func setSelectedProvider(_ provider: ModelProvider, in storage: PokiStorage = .live) {
