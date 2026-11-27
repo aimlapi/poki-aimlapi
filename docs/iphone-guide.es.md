@@ -14,7 +14,7 @@ Consulta los cambios de cada versión en [CHANGELOG.md](../CHANGELOG.md).
 | Ordenador | Un Mac con macOS 14 o posterior, o un PC con Windows (x64) con Apple Devices o iTunes. La instalación mediante el script del agente en Mac también necesita Node.js 24 o posterior. |
 | Cable y cuenta | Un cable USB de datos y una cuenta de Apple. Con una cuenta gratuita, la firma dura 7 días y Poki Setup puede renovarla. |
 | Conexión | Una app VPN en el iPhone que dirija `10.7.0.1` al propio teléfono. Sirven LocalDevVPN, gratuita en el App Store, o Karing y Shadowrocket configuradas con las instrucciones de Poki. |
-| Cuenta del modelo | Necesitas la tuya. Puedes empezar con ChatGPT Plus o Pro, introducir una clave API de Anthropic, OpenAI, Gemini, DeepSeek, OpenRouter u OpenCode Go, o usar tu propio servidor compatible con OpenAI. La suscripción de Claude no permite iniciar sesión aquí; usa una clave API de Anthropic. |
+| Cuenta del modelo | Necesitas la tuya. Puedes empezar con ChatGPT Plus o Pro, introducir una clave API de Anthropic, OpenAI, Gemini, DeepSeek, OpenRouter, AI/ML API u OpenCode Go, o usar tu propio servidor compatible con OpenAI. La suscripción de Claude no permite iniciar sesión aquí; usa una clave API de Anthropic. |
 
 En iOS 27 y posteriores, Poki controla el iPhone mediante servicios nativos. En iOS 18 a 26 usa una sesión XCTest, que necesita la automatización de la interfaz activada en los ajustes de desarrollador del iPhone. La app también se instala en iPad con iPadOS 18 o posterior.
 
@@ -64,7 +64,7 @@ Comprueba la nota en Notas: el título debe ser "Poki Demo" y el contenido debe 
 
 **¿Qué iPhone y versión de iOS necesito?** iOS 18 o posterior en un iPhone XS, XR, SE (2.ª generación) o posterior. También se instala en iPad con iPadOS 18 o posterior. Las pruebas físicas se han hecho en iOS 27; iOS 18 a 26 usan otro método de control que aún no se ha verificado en un iPhone físico. Consulta [verificación y límites conocidos](verification.md).
 
-**¿Necesito mi propia cuenta del modelo?** Sí. Inicia sesión con ChatGPT Plus o Pro, introduce una clave API de Anthropic, OpenAI, Gemini, DeepSeek, OpenRouter u OpenCode Go, o usa tu servidor compatible con OpenAI. Las conversaciones por voz también requieren una clave de modelo de voz. Consulta [Qué necesitas](#qué-necesitas).
+**¿Necesito mi propia cuenta del modelo?** Sí. Inicia sesión con ChatGPT Plus o Pro, introduce una clave API de Anthropic, OpenAI, Gemini, DeepSeek, OpenRouter, AI/ML API u OpenCode Go, o usa tu servidor compatible con OpenAI. Las conversaciones por voz también requieren una clave de modelo de voz. Consulta [Qué necesitas](#qué-necesitas).
 
 **¿Qué hago si no aparecen actualizaciones, por ejemplo en una red de China continental?** Poki consulta GitHub. Algunas redes no pueden acceder o alcanzan los límites 403 y 429. Prueba otra red o servidor proxy, o usa Renew en Poki Setup desde el ordenador. Consulta [Actualizar Poki](#actualizar-poki).
 

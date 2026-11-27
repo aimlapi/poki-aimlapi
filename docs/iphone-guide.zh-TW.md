@@ -14,7 +14,7 @@
 | 電腦 | macOS 14 或更高版本的 Mac，或已安裝 Apple Devices 或 iTunes 的 Windows 電腦（x64）。在 Mac 上透過代理程式安裝還需要 Node.js 24 或更高版本。 |
 | 資料線與帳號 | USB 資料線和 Apple 帳號。免費帳號簽署有效期為 7 天，Poki Setup 可以為你重新簽署。 |
 | 連線 | iPhone 上需要能將 `10.7.0.1` 路由回本機的 VPN 應用程式。可用 App Store 上免費的 LocalDevVPN，也可按 Poki 的說明設定 Karing 或 Shadowrocket。 |
-| 模型帳號 | 需要自備。用 ChatGPT Plus 或 Pro 方案登入最方便，也可以填寫 Anthropic、OpenAI、Gemini、DeepSeek、OpenRouter 或 OpenCode Go 的 API 金鑰，或接入自己的 OpenAI 相容服務。Claude 訂閱不能直接登入，請使用 Anthropic API 金鑰。 |
+| 模型帳號 | 需要自備。用 ChatGPT Plus 或 Pro 方案登入最方便，也可以填寫 Anthropic、OpenAI、Gemini、DeepSeek、OpenRouter、AI/ML API 或 OpenCode Go 的 API 金鑰，或接入自己的 OpenAI 相容服務。Claude 訂閱不能直接登入，請使用 Anthropic API 金鑰。 |
 
 iOS 27 及以上透過原生服務控制 iPhone。iOS 18 至 26 使用 XCTest 工作階段，需要在 iPhone 的開發者設定裡開啟 UI 自動化。應用程式也可安裝到 iPadOS 18 或更高版本的 iPad。
 
@@ -64,7 +64,7 @@ iPhone 應用程式使用你自備的模型帳號。電腦上編碼代理程式�
 
 **需要哪款 iPhone 和哪個 iOS 版本？** iOS 18 或更高版本，即 iPhone XS、XR、SE（第 2 代）或更新機型，也支援安裝到 iPadOS 18 或更高版本的 iPad。目前真機測試使用 iOS 27，iOS 18 至 26 的控制方式不同，尚未在真機驗證。詳見[驗證記錄與已知限制](verification.md)。
 
-**需要自己的模型帳號嗎？** 需要。可用 ChatGPT Plus 或 Pro 登入，填寫 Anthropic、OpenAI、Gemini、DeepSeek、OpenRouter 或 OpenCode Go 的 API 金鑰，或接入自己的 OpenAI 相容服務。語音對話還需要語音模型金鑰。詳見[需要準備什麼](#需要準備什麼)。
+**需要自己的模型帳號嗎？** 需要。可用 ChatGPT Plus 或 Pro 登入，填寫 Anthropic、OpenAI、Gemini、DeepSeek、OpenRouter、AI/ML API 或 OpenCode Go 的 API 金鑰，或接入自己的 OpenAI 相容服務。語音對話還需要語音模型金鑰。詳見[需要準備什麼](#需要準備什麼)。
 
 **看不到更新，例如在中國大陸的網路上，怎麼辦？** Poki 從 GitHub 檢查更新，部分網路無法存取，或遇到 403、429 請求限制。可換網路或代理節點，也可以在電腦上的 Poki Setup 中使用 Renew 更新。詳見[更新 Poki](#更新-poki)。
 

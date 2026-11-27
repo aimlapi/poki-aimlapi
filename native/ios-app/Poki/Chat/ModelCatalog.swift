@@ -14,6 +14,7 @@ enum ModelCatalog {
         case .deepseek: ["deepseek-flash"]
         case .gemini: ["gemini-3.8-flash"]
         case .openrouter: ["anthropic/claude-sonnet-5.5", "google/gemini-3.8-flash"]
+        case .aimlapi: ["google/gemini-3.8-flash", "anthropic/claude-sonnet-5.5"]
         case .custom: Set(provider.models(in: storage).map(\.id))
         }
     }
@@ -148,7 +149,7 @@ enum ModelCatalog {
     static func store(_ data: Data, for provider: ModelProvider, storage: PokiStorage = .live) throws -> Int {
         guard let json = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any],
               let items = (json["data"] ?? json["models"]) as? [[String: Any]] else { throw DiscoveryError.malformed }
-        var ids = listedIDs(items, provider)
+        var ids = listedIDs(provider == .aimlapi ? aimlapiChatItems(items) : items, provider)
         guard !ids.isEmpty else { throw DiscoveryError.malformed }
         if provider == .openai {
             let voice = items.compactMap { $0["id"] as? String }.filter { $0.contains("realtime") && !$0.contains("transcribe") }.sorted()
@@ -170,6 +171,16 @@ enum ModelCatalog {
         storage.defaults.removeObject(forKey: "models.failedAt.\(provider.rawValue)")
         ModelKeys.saved += 1
         return ids.count
+    }
+
+    /// AI/ML API lists every kind of model (images, video, speech) with its API in `type`; the chat runs
+    /// on chat completions and calls tools, so only those models are kept.
+    static func aimlapiChatItems(_ items: [[String: Any]]) -> [[String: Any]] {
+        items.filter { item in
+            guard item["type"] as? String == "openai/chat-completions" else { return false }
+            guard let capabilities = item["capabilities"] as? [String] else { return true }
+            return capabilities.contains("tools")
+        }
     }
 
     /// The chat model ids of a provider's list. Codex's list names models by `slug` and hides some
@@ -393,6 +404,10 @@ enum ModelCatalog {
         case .openrouter:
             request = URLRequest(url: URL(string: "https://openrouter.ai/api/v1/models")!)
             if let key { request.setValue("Bearer \(key)", forHTTPHeaderField: "Authorization") }
+        case .aimlapi:
+            // The list is public: it is read without the key, so no redirect can carry the key away.
+            guard key != nil else { return nil }
+            request = URLRequest(url: URL(string: AIMLAPIClient.baseURL + "/models?include=all")!)
         case .custom:
             return try? customRequest(address: ModelKeys.customURL(in: storage), key: key)
         case .chatgpt:

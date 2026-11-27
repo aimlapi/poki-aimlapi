@@ -128,7 +128,7 @@ final class PiLoop {
             return sessionID
         case .custom:
             return URL(string: model.baseUrl)?.host?.lowercased() == "api.openai.com" ? sessionID : nil
-        case .anthropic, .deepseek, .gemini, .openrouter:
+        case .anthropic, .deepseek, .gemini, .openrouter, .aimlapi:
             return nil
         }
     }
@@ -253,6 +253,7 @@ final class PiLoop {
                 }
                 var options = options
                 if let endpoint { options.httpClient = endpoint }
+                if provider == .aimlapi { options.httpClient = AIMLAPIClient(inner: AIMLAPIClient.transport(env: options.env)) }
                 if provider == .custom {
                     // PiSwift uses sessionId for both OpenCode's routing header and
                     // the OpenAI Responses prompt_cache_key. Generic compatible

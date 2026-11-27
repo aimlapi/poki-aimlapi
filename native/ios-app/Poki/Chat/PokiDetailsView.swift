@@ -1436,6 +1436,8 @@ struct ProviderTile: View {
         Group {
             if let logo = provider.logo {
                 Image(logo).renderingMode(.template).resizable().scaledToFit().padding(size * 0.2)
+            } else if provider == .aimlapi {
+                Text(verbatim: provider.mark).font(.system(size: size * 0.38, weight: .bold))
             } else {
                 Image(systemName: "server.rack").font(.system(size: size * 0.45, weight: .semibold))
             }
@@ -1456,7 +1458,7 @@ extension ModelProvider {
         case .gemini: "Provider-googlegemini"
         case .deepseek: "Provider-deepseek"
         case .openrouter: "Provider-openrouter"
-        case .custom: nil
+        case .aimlapi, .custom: nil
         }
     }
 }

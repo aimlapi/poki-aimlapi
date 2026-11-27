@@ -14,7 +14,7 @@
 | 컴퓨터 | macOS 14 이상인 Mac, 또는 Apple Devices나 iTunes가 설치된 Windows PC(x64). Mac에서 에이전트가 설치 스크립트를 사용하려면 Node.js 24 이상도 필요합니다. |
 | 케이블과 계정 | USB 데이터 케이블과 Apple 계정. 무료 계정의 서명은 7일간 유효하며 Poki Setup이 갱신할 수 있습니다. |
 | 연결 | `10.7.0.1`을 iPhone 자체로 연결하는 VPN 앱. App Store의 무료 LocalDevVPN이나 Poki의 안내에 따라 설정한 Karing, Shadowrocket을 사용할 수 있습니다. |
-| 모델 계정 | 본인 계정이 필요합니다. ChatGPT Plus 또는 Pro 로그인이 간편한 시작 방법입니다. Anthropic, OpenAI, Gemini, DeepSeek, OpenRouter, OpenCode Go의 API 키나 자체 OpenAI 호환 서버도 사용할 수 있습니다. Claude 구독으로는 로그인할 수 없으므로 Anthropic API 키를 사용하세요. |
+| 모델 계정 | 본인 계정이 필요합니다. ChatGPT Plus 또는 Pro 로그인이 간편한 시작 방법입니다. Anthropic, OpenAI, Gemini, DeepSeek, OpenRouter, AI/ML API, OpenCode Go의 API 키나 자체 OpenAI 호환 서버도 사용할 수 있습니다. Claude 구독으로는 로그인할 수 없으므로 Anthropic API 키를 사용하세요. |
 
 iOS 27 이상에서는 네이티브 서비스로 iPhone을 조작합니다. iOS 18부터 26까지는 XCTest 세션을 사용하므로 iPhone 개발자 설정에서 UI 자동화를 켜야 합니다. iPadOS 18 이상인 iPad에도 설치할 수 있습니다.
 
@@ -64,7 +64,7 @@ Create a new note in Notes titled "Poki Demo" with these three lines: Milk, Eggs
 
 **어떤 iPhone과 iOS가 필요한가요?** iOS 18 이상인 iPhone XS, XR, SE(2세대) 또는 이후 기종이며, iPadOS 18 이상인 iPad에도 설치할 수 있습니다. 실제 기기 테스트는 iOS 27에서 진행했습니다. 다른 제어 방식을 사용하는 iOS 18부터 26까지는 실제 iPhone에서 아직 검증하지 않았습니다. [검증 결과와 알려진 제한](verification.md)을 참고하세요.
 
-**내 모델 계정이 필요한가요?** 네. ChatGPT Plus 또는 Pro로 로그인하거나 Anthropic, OpenAI, Gemini, DeepSeek, OpenRouter, OpenCode Go의 API 키 또는 자체 OpenAI 호환 서버를 사용하세요. 음성 대화에는 음성 모델 키도 필요합니다. [준비할 것](#준비할-것)을 참고하세요.
+**내 모델 계정이 필요한가요?** 네. ChatGPT Plus 또는 Pro로 로그인하거나 Anthropic, OpenAI, Gemini, DeepSeek, OpenRouter, AI/ML API, OpenCode Go의 API 키 또는 자체 OpenAI 호환 서버를 사용하세요. 음성 대화에는 음성 모델 키도 필요합니다. [준비할 것](#준비할-것)을 참고하세요.
 
 **중국 본토 네트워크 등에서 업데이트가 보이지 않으면 어떻게 하나요?** Poki는 GitHub에서 업데이트를 확인합니다. 일부 네트워크는 접속할 수 없거나 403, 429 요청 제한에 걸립니다. 다른 네트워크나 프록시 서버를 사용하거나, 컴퓨터의 Poki Setup에서 Renew로 업데이트하세요. [Poki 업데이트하기](#poki-업데이트하기)를 참고하세요.
 

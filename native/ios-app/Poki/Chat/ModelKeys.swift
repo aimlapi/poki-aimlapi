@@ -4,7 +4,7 @@ import PiSwiftAI
 /// The model providers the chat can use with the owner's own key or account (ESP-171 board "M Model").
 /// The wired ones run through pi (PiLoop); the others store their key and address for a later step.
 enum ModelProvider: String, CaseIterable, Identifiable, Sendable {
-    case anthropic, openai, chatgpt, deepseek, gemini, openrouter, custom
+    case anthropic, openai, chatgpt, deepseek, gemini, openrouter, aimlapi, custom
     var id: String { rawValue }
 
     var name: String {
@@ -15,6 +15,7 @@ enum ModelProvider: String, CaseIterable, Identifiable, Sendable {
         case .deepseek: "DeepSeek"
         case .gemini: "Gemini"
         case .openrouter: "OpenRouter"
+        case .aimlapi: "AI/ML API"
         case .custom: AppLocalization.text(LocalizedStringResource("Custom Endpoint"))
         }
     }
@@ -28,6 +29,7 @@ enum ModelProvider: String, CaseIterable, Identifiable, Sendable {
         case .deepseek: "D"
         case .gemini: "G"
         case .openrouter: "R"
+        case .aimlapi: "AI"
         case .custom: "{ }"
         }
     }
@@ -40,6 +42,7 @@ enum ModelProvider: String, CaseIterable, Identifiable, Sendable {
         case .deepseek: 0x4D6BFE
         case .gemini: 0x4285F4
         case .openrouter: 0x6566F1
+        case .aimlapi: 0x1A1A2E
         case .custom: 0x8E8E93
         }
     }
@@ -54,6 +57,8 @@ enum ModelProvider: String, CaseIterable, Identifiable, Sendable {
         case .deepseek: "deepseek"
         case .gemini: "google"
         case .openrouter: "openrouter"
+        // pi has no AI/ML API provider; its models run on pi's chat completions adapter (`piModel`).
+        case .aimlapi: "aimlapi"
         case .custom: "poki-custom"
         }
     }
@@ -72,6 +77,7 @@ enum ModelProvider: String, CaseIterable, Identifiable, Sendable {
         case .chatgpt: ""
         case .gemini: "AIza…"
         case .openrouter: "sk-or-…"
+        case .aimlapi: AppLocalization.text(LocalizedStringResource("API key"))
         case .custom: AppLocalization.text(LocalizedStringResource("API key, if it needs one"))
         }
     }
@@ -122,6 +128,14 @@ enum ModelProvider: String, CaseIterable, Identifiable, Sendable {
             ChatModelChoice(id: "openai/gpt-6.1-sol", name: "GPT-6.1 Sol (OpenRouter)"),
             ChatModelChoice(id: "google/gemini-3.8-flash", name: "Gemini 3.8 Flash (OpenRouter)"),
         ]
+        // One AI/ML API key, the main labs' models on its chat completions API. Each reads screenshots and
+        // calls tools (api.aimlapi.com/v1/models?include=all, November 2026); the key's list adds the rest.
+        case .aimlapi: [
+            ChatModelChoice(id: "google/gemini-3.8-flash", name: "Gemini 3.8 Flash (AI/ML API)"),
+            ChatModelChoice(id: "anthropic/claude-sonnet-5.5", name: "Claude Sonnet 5.5 (AI/ML API)"),
+            ChatModelChoice(id: "openai/gpt-6.2-sol", name: "GPT-6.2 Sol (AI/ML API)"),
+            ChatModelChoice(id: "deepseek/deepseek-v4.1-flash", name: "DeepSeek V4.1 Flash (AI/ML API)"),
+        ]
         // Whatever model each of the owner's services serves (a local server, a company gateway), named
         // with its service once there is more than one.
         case .custom:
@@ -138,6 +152,7 @@ enum ModelProvider: String, CaseIterable, Identifiable, Sendable {
         case .deepseek: AppLocalization.text(LocalizedStringResource("Create a key at platform.deepseek.com, then paste it here."))
         case .gemini: AppLocalization.text(LocalizedStringResource("Create a key at aistudio.google.com, then paste it here."))
         case .openrouter: AppLocalization.text(LocalizedStringResource("Create a key at openrouter.ai/keys, then paste it here."))
+        case .aimlapi: AppLocalization.text(LocalizedStringResource("Create a key at aimlapi.com/app/keys, then paste it here."))
         case .custom: AppLocalization.text(LocalizedStringResource("Any server that speaks the OpenAI Responses API or chat completions API. Poki sends the key, if any, only to this service’s addresses."))
         default: ""
         }
@@ -241,6 +256,11 @@ enum ModelProvider: String, CaseIterable, Identifiable, Sendable {
                   let endpoint = provider.primary else { return nil }
             return Self.customModel(chosen.model, baseUrl: endpoint.normalized, api: endpoint.sent.piAPI,
                                     reasoning: provider.reasoning, piProvider: provider.piProvider)
+        }
+        // AI/ML API is not in pi's catalog: every model takes the plain chat completions setup on its one
+        // address, which `AIMLAPIClient` holds the key to.
+        if self == .aimlapi {
+            return unlistedModel(id, provider: piProvider, baseUrl: AIMLAPIClient.baseURL)
         }
         if let model = Self.knownModel(provider: piProvider, id: id) { return model }
         // OpenRouter serves thousands of models its catalog lacks, and a built-in model's setup (Anthropic

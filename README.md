@@ -59,7 +59,7 @@ Poki is an open-source iPhone agent that operates your entire iPhone for you. Th
    ```
 
    Or download [Poki Setup](https://github.com/JosssphZhou/poki/releases/tag/desktop-v0.2.9) for macOS (`.dmg`) or Windows (`.exe`) and follow the window.
-2. **Connect and add your model account.** Accept **Trust**, turn on Developer Mode and Automation Mode when iOS asks, set up an external connection routing `10.7.0.1` back to your iPhone (such as free LocalDevVPN), and sign in with ChatGPT Plus or Pro or paste an API key (Anthropic, OpenAI, Gemini, DeepSeek, OpenRouter, OpenCode Go, or an OpenAI-compatible server).
+2. **Connect and add your model account.** Accept **Trust**, turn on Developer Mode and Automation Mode when iOS asks, set up an external connection routing `10.7.0.1` back to your iPhone (such as free LocalDevVPN), and sign in with ChatGPT Plus or Pro or paste an API key (Anthropic, OpenAI, Gemini, DeepSeek, OpenRouter, AI/ML API, OpenCode Go, or an OpenAI-compatible server).
 3. **Run your first task.** Open Poki and send:
 
    ```text
@@ -79,7 +79,7 @@ To build and sign the iPhone app with Xcode, use the [source install prompt for 
 | Computer | Mac with macOS 14+ (Node.js 24+ for agent install) or Windows PC (x64) with Apple Devices or iTunes. |
 | Cable and account | USB data cable and an Apple Account. Poki Setup renews free 7-day signatures while open, or sign in inside Poki. |
 | Connection | External connection routing `10.7.0.1` back to the iPhone (LocalDevVPN, Karing, or Shadowrocket). |
-| Model account | ChatGPT Plus/Pro sign-in, an API key (Anthropic, OpenAI, Gemini, DeepSeek, OpenRouter, OpenCode Go), or an OpenAI-compatible server. |
+| Model account | ChatGPT Plus/Pro sign-in, an API key (Anthropic, OpenAI, Gemini, DeepSeek, OpenRouter, AI/ML API, OpenCode Go), or an OpenAI-compatible server. |
 
 - Agent installer skill and Poki Setup: [install-poki skill](skills/install-poki/SKILL.md) and [Poki Setup](desktop/README.md)
 - Verification, limits, and release channels: [Verification](docs/verification.md) and [Release channels](docs/release-channels.md)

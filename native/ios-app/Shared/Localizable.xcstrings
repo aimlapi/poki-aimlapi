@@ -6861,6 +6861,22 @@
         }
       }
     },
+    "Create a key at aimlapi.com/app/keys, then paste it here." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 aimlapi.com/app/keys 创建密钥，然后粘贴到此处。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 aimlapi.com/app/keys 建立金鑰，然後貼上到此處。"
+          }
+        }
+      }
+    },
     "Create a key at aistudio.google.com, then paste it here." : {
       "localizations" : {
         "zh-Hans" : {
